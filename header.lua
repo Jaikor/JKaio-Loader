@@ -97,7 +97,6 @@ return {
         text = 0xFFa5c5a7,
         background1 = 0x87f6fd68,
         background2 = 0x99000000  
-        }
       },
     
     
