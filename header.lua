@@ -92,13 +92,13 @@ return {
 
         riot = true,
         flag = {
-        text = "JKSHOP AIO",
-        color = {
-        text = 0xFFa5c5a7,
-        background1 = 0x87f6fd68,
-        background2 = 0x99000000  
+			text = "JKSHOP AIO",
+			color = {
+				text = 0xFFa5c5a7,
+				background1 = 0x87f6fd68,
+				background2 = 0x99000000  
       },
-    
+    },
     
     shard = {
       "main",
