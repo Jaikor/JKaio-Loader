@@ -73,7 +73,7 @@ return {
                                           Vayne, 
                                           Veigar, 
                                           Vi,
-										  Viego,
+					  Viego,
                                           Warwick, 
                                           Xayah, 
                                           Yasuo, 
