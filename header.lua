@@ -107,8 +107,8 @@ return {
       "crypto"
     },
   
-    load = function()
-      return true
+   load = function()
+      return (JKAIO[player.charName] == true)
     end,
   }
  
