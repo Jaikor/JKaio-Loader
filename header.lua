@@ -87,7 +87,7 @@ return {
     id = "JKSHOPAIO",
     name = "JKAIO - " ..(player and player.charName or ''),
     author = "JK",
-    description = [[ 80 Champs supported: Ahri,
+    description = [[ 81 Champs supported: Ahri,
                                           Alistar, 
                                           Amumu, 
                                           Anivia, 
@@ -164,7 +164,8 @@ return {
 					  Xerath, 
                                           Yasuo, 
                                           Yone, 
-                                          Zac, 
+                                          Zac,
+					  Zed,
                                           Ziggs,
                                           Zilean, 
                                           Zyra 
@@ -197,4 +198,3 @@ return {
       return (JKAIO[player.charName] == true)
     end,
   }
- 
