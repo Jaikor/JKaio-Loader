@@ -78,6 +78,7 @@ local JKAIO = {
     Yasuo        = true,
     Yone         = true,
     Zac          = true,
+    Zed		 = true,
     Ziggs        = true,
     Zilean       = true,
     Zyra         = true 
