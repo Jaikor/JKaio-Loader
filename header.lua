@@ -89,7 +89,11 @@ return {
     id = "JKSHOPAIO",
     name = "JKAIO - " ..(player and player.charName or ''),
     author = "JK",
-    description = [[ 82 Champs supported: Ahri,
+    description = [[ > Join discord to learn how to load this script
+		     > https://discord.gg/SAchatj
+
+					 82 Champs supported: 
+					  Ahri,
                                           Alistar, 
                                           Amumu, 
                                           Anivia, 
@@ -174,7 +178,7 @@ return {
                                           Zyra 
                     ]],
 
-    shard_url="https://github.com/Jaikor/JKaio-Loader/blob/main/JKaio-loader.shard",
+    --shard_url="https://github.com/Jaikor/JKaio-Loader/blob/main/JKaio-loader.shard",
 
     icon_url = "https://puu.sh/FF3pu/ec7d7cc81d.jpg",
 
