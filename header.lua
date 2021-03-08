@@ -178,7 +178,7 @@ return {
                                           Zyra 
                     ]],
 
-    --shard_url="https://github.com/Jaikor/JKaio-Loader/blob/main/JKaio-loader.shard",
+    shard_url="https://github.com/Jaikor/JKaio-Loader/blob/main/JKaio-loader.shard",
 
     icon_url = "https://puu.sh/FF3pu/ec7d7cc81d.jpg",
 
