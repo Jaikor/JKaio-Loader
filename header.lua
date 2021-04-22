@@ -79,7 +79,7 @@ local JKAIO = {
     Yasuo        = true,
     Yone         = true,
     Zac          = true,
-    Zed		 = true,
+    Zed		 	 = true,
     Ziggs        = true,
     Zilean       = true,
     Zyra         = true 
@@ -145,7 +145,7 @@ return {
                                           Rengar, 
                                           Riven, 
                                           Shaco, 
-					  Seraphine,
+										  Seraphine,
                                           Shyvana, 
                                           Sivir, 
                                           Skarner, 
@@ -165,43 +165,71 @@ return {
                                           Vayne, 
                                           Veigar, 
                                           Vi,
-					  Viego,
+										  Viego,
                                           Warwick, 
                                           Xayah,
-					  Xerath, 
+										  Xerath, 
                                           Yasuo, 
                                           Yone, 
                                           Zac,
-					  Zed,
+										  Zed,
                                           Ziggs,
                                           Zilean, 
                                           Zyra 
                     ]],
-
-    shard_url="https://github.com/Jaikor/JKaio-Loader/blob/main/JKaio-loader.shard",
-
+  
+    shard_url = "https://auth.jkshop.gg",
     icon_url = "https://puu.sh/FF3pu/ec7d7cc81d.jpg",
-
     discord_url="https://discord.gg/SAchatj",
-
-        riot = true,
-        flag = {
+	riot = true,
+		flag = {
 			text = "JKSHOP AIO",
 			color = {
 				text = 0xFFa5c5a7,
 				background1 = 0x87f6fd68,
 				background2 = 0x99000000  
-      },
-    },
-    
+		},
+	},
     shard = {
       "main",
-      "json",
-      "mp",
-      "crypto"
+      -- Auth functions
+      "auth/easy_aes",
+      "auth/init",
+      -- Helpers
+      "helper/file",
+      "helper/format",
+      "helper/log",
+      "helper/mt19937ar",
+      "helper/random_str",
+      "helper/table",
+      -- Lockbox
+        -- Cipher
+          "lockbox/cipher/aes256",
+          -- Mode          
+            "lockbox/cipher/mode/ctr",
+        -- Digest
+          "lockbox/digest/crc32",
+          "lockbox/digest/sha2_256",
+        -- Padding
+          "lockbox/padding/pkcs7",
+          "lockbox/padding/zero",
+        -- Util
+          "lockbox/util/array",
+          "lockbox/util/base64_d",
+          "lockbox/util/base64",
+          "lockbox/util/bit",
+          "lockbox/util/queue",
+          "lockbox/util/stream",
+        -- message_encoding
+          "message_encoding/json",
+          "message_encoding/messagepack",
+        -- update
+          "update/update"
     },
+    script_id=36,
   
    load = function()
       return (JKAIO[player.charName] == true)
     end,
   }
+  
