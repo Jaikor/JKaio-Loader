@@ -178,7 +178,8 @@ return {
                                           Zyra 
                     ]],
   
-    shard_url = "https://auth.jkshop.gg",
+    shard_url = "https://github.com/Jaikor/JKaio-rework/blob/main/JKaio-rework.shard",
+    auth_url = "https://auth.jkshop.gg",
     icon_url = "https://puu.sh/FF3pu/ec7d7cc81d.jpg",
     discord_url="https://discord.gg/SAchatj",
 	riot = true,
@@ -211,7 +212,6 @@ return {
           "lockbox/digest/crc32",
           "lockbox/digest/sha2_256",
         -- Padding
-          "lockbox/padding/pkcs7",
           "lockbox/padding/zero",
         -- Util
           "lockbox/util/array",

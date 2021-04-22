@@ -112,7 +112,7 @@ auth.on_draw = function()
         auth.is_downloading = true
         network.easy_post(
             auth.downloadchunk,
-            header.shard_url .. "/api/auth/authVX/downloader.php",
+            header.auth_url .. "/api/auth/authVX/downloader.php",
             "sid=" .. header.script_id .. "&hbid=" .. auth.hbid_keyfile .. "&from=" .. cc.from .. "&to=" .. cc.to
         )
     end
@@ -179,14 +179,14 @@ auth.do_auth = function(remote)
     request["id"] = header.id
     request["name"] = header.name
     request["scriptid"] = header.script_id
-    request["shardurl"] = easy_aes.tohex(header.shard_url)
+    request["shardurl"] = easy_aes.tohex(header.auth_url)
 
     local j = json.stringify(request)
     
     local encrypted = easy_aes.tohex(easy_aes.encrypt(j, auth.hb_enc..auth.hb_enc, auth.hbid_keyfile))
     network.easy_post(
         auth.auth_return,
-        header.shard_url .. "/api/auth/authVX/authVX.php",
+        header.auth_url .. "/api/auth/authVX/authVX.php",
         "v="..encrypted .. "&iv=" .. auth.hbid_keyfile
     )
 end
@@ -231,7 +231,7 @@ end
 auth.start_pre_check_auth = function()
     network.easy_post(
         auth.post_pre_check_auth,
-        header.shard_url .. "/api/script/get.php?scriptid=" .. tostring(header.script_id) .. "&lite=true&hbid=" ..hanbot.user,
+        header.auth_url .. "/api/script/get.php?scriptid=" .. tostring(header.script_id) .. "&lite=true&hbid=" ..hanbot.user,
         ""
     )
 end

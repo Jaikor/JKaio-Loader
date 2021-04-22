@@ -17,7 +17,7 @@ update.StartHanbotIDUpdate = function(callback)
     if hb_enc then
         network.easy_post(
             callback,
-            header.shard_url .. "/api/user/keyfile/update_hbid2.php",
+            header.auth_url .. "/api/user/keyfile/update_hbid2.php",
             "hanbot_id=" .. hbid_keyfile .. "&new_hanbot_id=" .. hanbot.user
         )
     else        
@@ -29,7 +29,7 @@ update.PrepareV2Migration = function(callback)
     log.print("Generating V2 key", log.LEVEL_LOG)
     network.easy_post(
         callback,
-        header.shard_url .. "/api/user/keyfile/update_hbid2.php",
+        header.auth_url .. "/api/user/keyfile/update_hbid2.php",
         "hanbot_id=" .. hanbot.user .. "&new_hanbot_id=" .. hanbot.user .. "&force_key=true"
     )
 end
