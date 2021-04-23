@@ -11,7 +11,6 @@ lockbox.digest.sha2_256 = module.load(header.id,'lockbox/digest/sha2_256')
 
 lockbox.padding = {}
 lockbox.padding.zero = module.load(header.id,'lockbox/padding/zero')
-lockbox.padding.pkcs7 = module.load(header.id,'lockbox/padding/pkcs7')
 
 lockbox.util = {}
 lockbox.util.array = module.load(header.id,'lockbox/util/array')

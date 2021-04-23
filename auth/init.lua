@@ -176,8 +176,8 @@ auth.do_auth = function(remote)
     request["key"] = v
     request["unix_time"] = os.time()
     
-    request["id"] = header.id
-    request["name"] = header.name
+    request["id"] = easy_aes.tohex(header.id)
+    request["name"] = easy_aes.tohex(header.name)
     request["scriptid"] = header.script_id
     request["shardurl"] = easy_aes.tohex(header.auth_url)
 
