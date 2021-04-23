@@ -86,7 +86,7 @@ local JKAIO = {
 }
 
 return {
-    id = "JKSHOPAIO-",
+    id = "JKSHOPAIO-Loader",
     name = "JKAIO - " ..(player and player.charName or ''),
     author = "JK",
     description = [[ > Join discord to learn how to load this script

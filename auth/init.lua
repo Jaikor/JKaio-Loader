@@ -41,6 +41,7 @@ auth.chunks = 0
 auth.script_size = 0
 
 auth.load = function()
+	print("auth load")
     
     local script_binary_s = base64_d.decode(auth.download)
 
@@ -60,6 +61,7 @@ auth.load = function()
 end
 
 auth.downloadchunk = function(http_status, message)
+	print("auth downloadchunk")
     if(auth.validate_http_status(http_status) == false)then
         return
     end
@@ -120,26 +122,34 @@ end
 
 
 auth.auth_return = function(http_status, message)
+	print("auth auth_return")
     if(auth.validate_http_status(http_status) == false)then
+		print("inv s")
         return
     end
+	
+	print("x")
 
     local d = json.parse(message)
     local remote_hash = d["h"]
+	print("x1")
 
     if file.exists(hanbot.path .. "\\" .. header.script_id .. ".lf") then
+		print("fx")
         local f = io.open(hanbot.path .. "\\" .. header.script_id .. ".lf")
         local file_content = f:read("*all")
         f:close()
         local crc32 = crc32.hash(file_content)
         if crc32 == remote_hash then
+			print("hash match")
             auth.download = easy_aes.fromhex(file_content)
             auth.load()
+			print("auth loaded")
             return
         end
-        return
     end
-
+	
+	print("!fx")
     auth.script_size = tonumber(d["l"])
     auth.remote_name = d["name"]
 
@@ -159,6 +169,7 @@ auth.auth_return = function(http_status, message)
 end
 
 auth.do_auth = function(remote)
+	print("auth do_auth")
     local key_file = io.open(hanbot.path .. "\\jk_auth2.key", "rb")
     local keyfile_content = key_file:read("*all")
     local k,v = messagepack.unpacker(keyfile_content)()
@@ -192,6 +203,7 @@ auth.do_auth = function(remote)
 end
 
 auth.post_pre_check_auth = function(http_status, message)
+	print("auth post_pre_check_auth")
     if(auth.validate_http_status(http_status) == false)then
         return
     end
@@ -229,6 +241,7 @@ auth.post_pre_check_auth = function(http_status, message)
 end
 
 auth.start_pre_check_auth = function()
+	print("auth start_pre_check_auth")
     network.easy_post(
         auth.post_pre_check_auth,
         header.auth_url .. "/api/script/get.php?scriptid=" .. tostring(header.script_id) .. "&lite=true&hbid=" ..hanbot.user,
