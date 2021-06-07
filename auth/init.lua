@@ -134,20 +134,24 @@ auth.auth_return = function(http_status, message)
     local remote_hash = d["h"]
 	print("x1")
 
-    if file.exists(hanbot.path .. "\\" .. header.script_id .. ".lf") then
-		print("fx")
-        local f = io.open(hanbot.path .. "\\" .. header.script_id .. ".lf")
-        local file_content = f:read("*all")
-        f:close()
-        local crc32 = crc32.hash(file_content)
-        if crc32 == remote_hash then
-			print("hash match")
-            auth.download = easy_aes.fromhex(file_content)
-            auth.load()
-			print("auth loaded")
-            return
-        end
-    end
+	if file.exists(hanbot.path .. "\\" .. "no_cache.jk") then
+		log.print("JK Cache disabled", log.LEVEL_WARN)
+	else
+		if file.exists(hanbot.path .. "\\" .. header.script_id .. ".lf") then
+			print("fx")
+			local f = io.open(hanbot.path .. "\\" .. header.script_id .. ".lf")
+			local file_content = f:read("*all")
+			f:close()
+			local crc32 = crc32.hash(file_content)
+			if crc32 == remote_hash then
+				print("hash match")
+				auth.download = easy_aes.fromhex(file_content)
+				auth.load()
+				print("auth loaded")
+				return
+			end
+		end
+	end
 	
 	print("!fx")
     auth.script_size = tonumber(d["l"])
@@ -171,30 +175,49 @@ end
 auth.do_auth = function(remote)
 	print("auth do_auth")
     local key_file = io.open(hanbot.path .. "\\jk_auth2.key", "rb")
+		print(1)
     local keyfile_content = key_file:read("*all")
+		print(2)
     local k,v = messagepack.unpacker(keyfile_content)()
+		print(3)
 
     auth.hbid_keyfile = v[1]
+		print(4)
     auth.hb_enc = v[2][1]
+		print(5)
     
     local random_string1 = random_str:random()
+		print(6)
     local random_string2 = random_str:random()
+		print(7)
     local random_string3 = random_str:random()
+		print(8)
     local random_string4 = random_str:random()
+		print(9)
 
     local request = {}
+		print(10)
     request["remote"] = remote
+		print(11)
     request["key"] = v
+		print(12)
     request["unix_time"] = os.time()
+		print(13)
     
     request["id"] = easy_aes.tohex(header.id)
+		print(14)
     request["name"] = easy_aes.tohex(header.name)
+		print(15)
     request["scriptid"] = header.script_id
+		print(16)
     request["shardurl"] = easy_aes.tohex(header.auth_url)
+		print(17)
 
     local j = json.stringify(request)
+		print(18)
     
     local encrypted = easy_aes.tohex(easy_aes.encrypt(j, auth.hb_enc..auth.hb_enc, auth.hbid_keyfile))
+		print(19)
     network.easy_post(
         auth.auth_return,
         header.auth_url .. "/api/auth/authVX/authVX.php",
@@ -205,6 +228,7 @@ end
 auth.post_pre_check_auth = function(http_status, message)
 	print("auth post_pre_check_auth")
     if(auth.validate_http_status(http_status) == false)then
+		print(message)
         return
     end
     
