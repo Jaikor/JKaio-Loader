@@ -136,7 +136,7 @@ return {
                                           Mordekaiser,
 					  Mundo, 
                                           Nami, 
-                                          Nasusu, 
+                                          Nasus, 
                                           Nautilus, 
                                           Neeko, 
                                           Nocturne, 
