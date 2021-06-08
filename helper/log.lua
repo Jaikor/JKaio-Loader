@@ -40,6 +40,7 @@ log.print = function(msg, level, chat_print)
     end
 
     if level == log.LEVEL_ERR then
+		print(t.dump(module._LOADED))
         diediedie()
     end
 end
