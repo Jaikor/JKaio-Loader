@@ -1,9 +1,9 @@
 local update = {}
-local file = module.load(header.id,'loader/helper/file')
-local log = module.load(header.id,'loader/helper/log')
+local file = module.load(header.id,'helper/file')
+local log = module.load(header.id,'helper/log')
 local message_encoding = {}
-message_encoding.messagepack = module.load(header.id,'loader/message_encoding/messagepack')
-local base64_d = module.load(header.id,'loader/lockbox/util/base64_d')
+message_encoding.messagepack = module.load(header.id,'message_encoding/messagepack')
+local base64_d = module.load(header.id,'lockbox/util/base64_d')
 
 update.cb = nil
 

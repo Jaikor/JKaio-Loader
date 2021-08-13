@@ -41,6 +41,7 @@ auth.chunks = 0
 auth.script_size = 0
 
 auth.load = function()
+	log.print("auth.load", log.LEVEL_LOG)
     
     local script_binary_s = base64_d.decode(auth.download)
 
@@ -120,6 +121,7 @@ end
 
 
 auth.auth_return = function(http_status, message)
+	log.print("auth_return", log.LEVEL_LOG)
     if(auth.validate_http_status(http_status) == false)then
         return
     end
@@ -128,16 +130,21 @@ auth.auth_return = function(http_status, message)
     local remote_hash = d["h"]
 
     if file.exists(hanbot.path .. "\\" .. header.script_id .. ".lf") then
+		log.print("found cached", log.LEVEL_LOG)
         local f = io.open(hanbot.path .. "\\" .. header.script_id .. ".lf")
         local file_content = f:read("*all")
         f:close()
         local crc32 = crc32.hash(file_content)
-        if crc32 == remote_hash then
+        if crc32 == remote_hash then			
+			log.print("crc match", log.LEVEL_LOG)
             auth.download = easy_aes.fromhex(file_content)
             auth.load()
             return
         end
-        return
+		log.print("crc doesn't match !", log.LEVEL_WARN)	
+		log.print("Local:\t" .. crc32, log.LEVEL_WARN)	
+		log.print("Remote:\t" .. remote_hash, log.LEVEL_WARN)	
+        --return
     end
 
     auth.script_size = tonumber(d["l"])
@@ -159,6 +166,7 @@ auth.auth_return = function(http_status, message)
 end
 
 auth.do_auth = function(remote)
+	log.print("do_auth", log.LEVEL_LOG)
     local key_file = io.open(hanbot.path .. "\\jk_auth2.key", "rb")
 	if key_file == nil then
 		log.print("Keyfile not found, aborting", log.LEVEL_ERR)
