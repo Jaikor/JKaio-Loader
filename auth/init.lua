@@ -10,6 +10,7 @@ local file = module.load(header.id, 'helper/file')
 local sha256 = module.load(header.id, 'lockbox/digest/sha2_256')
 local crc32 = module.load(header.id, 'lockbox/digest/crc32')
 local stream = module.load(header.id, 'lockbox/util/stream')
+local lock = module.load(header.id,'helper/lock')
 
 local auth = {}
 
@@ -58,6 +59,7 @@ auth.load = function()
     end
 
     module.load_shard_buffer(header.id, buffer, buffer_size, hx)
+	lock.unlock()
 end
 
 auth.downloadchunk = function(http_status, message)
