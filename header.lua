@@ -200,6 +200,7 @@ return {
       "auth/init",
       -- Helpers
       "helper/file",
+      "helper/lock",
       "helper/format",
       "helper/log",
       "helper/mt19937ar",

@@ -1,4 +1,5 @@
 local file = module.load(header.id,'helper/file')
+	local log = module.load(header.id,'helper/log')
 
 local MIN_SCAN_ID = 0
 local MAX_SCAN_ID = 512
@@ -8,10 +9,12 @@ lock.sleep = 0
 lock.ownpath = hanbot.path .. "\\" .. header.script_id .. ".lock"
 
 lock.load = function(cb)
+	log.print("lock.load", log.LEVEL_LOG)
 	if file.exists(lock.ownpath) then
 		local f = io.open(lock.ownpath, "wb")
 		f:write("")
 		f:close()
+		log.print("cleaned lock", log.LEVEL_LOG)
 	end
 	lock.cb = cb
 	
@@ -19,6 +22,7 @@ lock.load = function(cb)
 end
 
 lock.sleep = function()
+	log.print("lock.sleep", log.LEVEL_LOG)
 	local x = os.clock()+math.random()*10
 	lock.nsleep = x
 end
@@ -37,6 +41,7 @@ lock.tick = function()
 end
 
 lock.try = function()
+	log.print("lock.try", log.LEVEL_LOG)
 	for i=MIN_SCAN_ID,MAX_SCAN_ID,1 do
 		if i ~= header.script_id then
 			local xlock = hanbot.path .. "\\" .. i .. ".lock"
@@ -53,12 +58,14 @@ lock.try = function()
 end
 
 lock.lock = function()
+	log.print("lock.lock", log.LEVEL_LOG)
 	local f = io.open(lock.ownpath, "wb")
 	f:write("LOCKED !")
 	f:close()
 end
 
 lock.unlock = function()
+	log.print("lock.unlock", log.LEVEL_LOG)
 	local f = io.open(lock.ownpath, "wb")
 	f:write("")
 	f:close()

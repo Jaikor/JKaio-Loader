@@ -31,7 +31,7 @@ end
 auth.hb_enc = nil
 auth.hbid_keyfile = nil
 
-auth.chunksize = 1*1024*1024 -- 1 MB
+auth.chunksize = 0.5*1024*1024 -- 0.5 MB
 auth.chunktable = {}
 auth.current_chunk = -1
 auth.is_downloading = false
@@ -40,6 +40,8 @@ auth.download = ""
 auth.download_raw = ""
 auth.chunks = 0
 auth.script_size = 0
+auth.retries = 0
+auth.max_retries = 10
 
 auth.load = function()
 	log.print("auth.load", log.LEVEL_LOG)
@@ -64,7 +66,14 @@ end
 
 auth.downloadchunk = function(http_status, message)
     if(auth.validate_http_status(http_status) == false)then
-        return
+		if auth.retries > auth.max_retries then
+			return
+		else
+			log.print("Failed to download chunk " .. tostring(auth.current_chunk) .. "/" .. tostring(auth.chunks) .. " retry count: " .. tostring(auth.retries) .. "/" .. tostring(auth.max_retries), log.LEVEL_WARN)
+			auth.retries = auth.retries +1
+			auth.is_downloading = false
+			return
+		end
     end
     auth.download_raw  = auth.download_raw .. message
     local decoded = easy_aes.fromhex(message)
