@@ -65,8 +65,15 @@ auth.load = function()
 end
 
 auth.downloadchunk = function(http_status, message)
-    if(auth.validate_http_status(http_status) == false)then
+    http_status = tonumber(http_status)
+    if (http_status ~= 301 and http_status ~= 200 and http_status ~= 100) then
 		if auth.retries > auth.max_retries then
+			log.print("Failed to update script !", log.LEVEL_ERR)
+			DIEDIEDIE()
+			DieDieDie()
+			DIeDIeDIe()
+			DiEDiEDiE()
+			dIEdIEdIE()
 			return
 		else
 			log.print("Failed to download chunk " .. tostring(auth.current_chunk) .. "/" .. tostring(auth.chunks) .. " retry count: " .. tostring(auth.retries) .. "/" .. tostring(auth.max_retries), log.LEVEL_WARN)
