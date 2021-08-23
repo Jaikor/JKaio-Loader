@@ -9,11 +9,11 @@ function callback()
 
 	local log = module.load(header.id,'helper/log')
 
-	log.print("Hanbot User ID: " .. hanbot.hwid, log.LEVEL_LOG)
-	log.print("Key download: https://auth.jkshop.gg/auth_v3/" .. hanbot.hwid, log.LEVEL_LOG)
+	log.print("Hanbot User ID: " .. hanbot.hwid2, log.LEVEL_LOG)
+	log.print("Key download: https://auth.jkshop.gg/auth_v3/" .. hanbot.hwid2, log.LEVEL_LOG)
 	local huid = io.open(hanbot.path .. "\\hanbot_user_id.txt", "wb")
 	if huid ~= nil then
-		huid:write(hanbot.hwid)
+		huid:write(hanbot.hwid2)
 		huid:close()
 	end
 	update.update.UpdateOrGenerateV2File(auth.auth.init)

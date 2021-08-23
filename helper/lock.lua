@@ -1,5 +1,5 @@
 local file = module.load(header.id,'helper/file')
-	local log = module.load(header.id,'helper/log')
+local log = module.load(header.id,'helper/log')
 
 local MIN_SCAN_ID = 0
 local MAX_SCAN_ID = 512
@@ -10,12 +10,17 @@ lock.ownpath = hanbot.path .. "\\" .. header.script_id .. ".lock"
 
 lock.load = function(cb)
 	log.print("lock.load", log.LEVEL_LOG)
-	if file.exists(lock.ownpath) then
-		local f = io.open(lock.ownpath, "wb")
-		f:write("")
-		f:close()
-		log.print("cleaned lock", log.LEVEL_LOG)
-	end
+	for i=MIN_SCAN_ID,MAX_SCAN_ID,1 do
+		local xlock = hanbot.path .. "\\" .. i .. ".lock"
+		local xlock_size = file.size(xlock)
+		if xlock_size > 0 then
+			local f = io.open(xlock, "wb")
+			f:write("")
+			f:close()
+		end
+    end
+	log.print("dropped all locks", log.LEVEL_LOG)
+	
 	lock.cb = cb
 	
 	lock.sleep()
@@ -23,7 +28,9 @@ end
 
 lock.sleep = function()
 	log.print("lock.sleep", log.LEVEL_LOG)
-	local x = os.clock()+math.random()*10
+	local x = os.clock()+0.5+math.random()*2
+	log.print("Current Time: " .. tostring(os.clock()), log.LEVEL_LOG)
+	log.print("Waiting until: " .. tostring(x), log.LEVEL_LOG)
 	lock.nsleep = x
 end
 

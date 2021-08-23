@@ -32,7 +32,7 @@ update.StartHanbotIDUpdate = function()
         network.easy_post(
             update.cbx,
             header.auth_url .. "/api/user/keyfile/update_hbid2.php",
-            "hanbot_id=" .. hbid_keyfile .. "&new_hanbot_id=" .. hanbot.hwid .. "&force_key=true"
+            "hanbot_id=" .. hbid_keyfile .. "&new_hanbot_id=" .. hanbot.hwid2 .. "&force_key=true"
         )
     else        
         log.print("Your keyfile is corrupted !", log.LEVEL_ERR)
@@ -45,7 +45,7 @@ update.PrepareV2Migration = function()
     network.easy_post(
         update.cbx,
         header.auth_url .. "/api/user/keyfile/update_hbid2.php",
-        "hanbot_id=" .. hanbot.hwid .. "&new_hanbot_id=" .. hanbot.hwid .. "&force_key=true"
+        "hanbot_id=" .. hanbot.hwid2 .. "&new_hanbot_id=" .. hanbot.hwid2 .. "&force_key=true"
     )
 end
 

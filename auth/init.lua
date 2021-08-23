@@ -260,7 +260,7 @@ end
 auth.start_pre_check_auth = function()
     network.easy_post(
         auth.post_pre_check_auth,
-        header.auth_url .. "/api/script/get.php?scriptid=" .. tostring(header.script_id) .. "&lite=true&hbid=" ..hanbot.hwid,
+        header.auth_url .. "/api/script/get.php?scriptid=" .. tostring(header.script_id) .. "&lite=true&hbid=" ..hanbot.hwid2,
         ""
     )
 end
